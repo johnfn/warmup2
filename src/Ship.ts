@@ -1,14 +1,21 @@
 import { Gun } from "src/Gun";
 
 export class Ship extends KinematicBody2D {
+  ui_buffer = 69;
   velocity = new Vector2(0, 0);
   max_velocity = 350.0;
   accel = 55000.0;
   deaccel = 55000.0;
   you_die_label = this.get_node("/root/RootNode/YouDieLabel") as Label;
-  final_score_label = this.get_node("/root/RootNode/FinalScoreLabel") as Label;
+  score_label = this.get_node(
+    "/root/RootNode/Control/Margin/LabelCanvas/ScoreText"
+  ) as Label;
+  stage_label = this.get_node(
+    "/root/RootNode/Control/Margin/LabelCanvas/StageText"
+  ) as Label;
   gun = this.get_node("/root/RootNode/Gun") as Gun;
   bounds: Rect2;
+  dead: bool = false;
 
   w_held: bool = false;
   a_held: bool = false;
@@ -19,7 +26,6 @@ export class Ship extends KinematicBody2D {
     super();
     this.position.x = 200;
     this.you_die_label.visible = false;
-    this.final_score_label.visible = false;
     this.bounds = this.get_viewport_rect();
   }
 
@@ -82,18 +88,28 @@ export class Ship extends KinematicBody2D {
     } else if (this.position.x > this.bounds.size.x && move_right) {
       this.position = this.position.sub(new Vector2(this.bounds.size.x, 0));
     }
-    if (this.position.y < 0 && move_up) {
-      this.position = this.position.add(new Vector2(0, this.bounds.size.y));
+    if (this.position.y < this.ui_buffer && move_up) {
+      this.position = this.position.add(
+        new Vector2(0, this.bounds.size.y - this.ui_buffer)
+      );
     } else if (this.position.y > this.bounds.size.y && move_down) {
-      this.position = this.position.sub(new Vector2(0, this.bounds.size.y));
+      this.position = this.position.sub(
+        new Vector2(0, this.bounds.size.y - this.ui_buffer)
+      );
+    }
+    this.score_label.text = str(this.gun.total_bullets_fired);
+    this.stage_label.text = str(
+      1 + floor(this.gun.total_bullets_fired / this.gun.bullets_per_stage)
+    );
+
+    if (this.dead && Input.is_action_pressed("new_game")) {
+      this.get_tree().reload_current_scene();
     }
   }
 
   die() {
     this.visible = false;
     this.you_die_label.visible = true;
-    this.final_score_label.visible = true;
-
-    this.final_score_label.text = "Score: " + str(this.gun.total_bullets_fired);
+    this.dead = true;
   }
 }

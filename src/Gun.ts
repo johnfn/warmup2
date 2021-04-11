@@ -5,7 +5,6 @@ export class Gun extends Node2D {
   time_to_fire: float = this.fire_speed;
   ship = this.get_node_safe("/root/RootNode/Ship");
   root = this.get_node_safe("/root/RootNode");
-  bullets_label = this.get_node_safe("/root/RootNode/BulletsLabel");
   total_bullets_fired = 0;
   bullets_per_stage = 20;
 
@@ -34,9 +33,7 @@ export class Gun extends Node2D {
       bullet.rotation = mouse_angle;
 
       this.root.add_child(bullet);
-
-      this.bullets_label.text =
-        "Bullets survived: " + str(++this.total_bullets_fired);
+      this.total_bullets_fired++;
     }
   }
 }

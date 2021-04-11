@@ -21,6 +21,7 @@ export class Bullet extends Area2D {
   safe_spawn_buffer = 0.5;
   horiz_lives = this.lives;
   vert_lives = this.lives;
+  ui_buffer = 69;
 
   constructor() {
     super();
@@ -57,11 +58,14 @@ export class Bullet extends Area2D {
       this.horiz_lives--;
     }
 
-    if (this.y_d < 0 && this.position.y < this.bounds.position.y) {
-      this.position.y += this.bounds.size.y;
+    if (
+      this.y_d < 0 &&
+      this.position.y < this.bounds.position.y + this.ui_buffer
+    ) {
+      this.position.y += this.bounds.size.y - this.ui_buffer;
       this.vert_lives--;
     } else if (this.y_d > 0 && this.position.y > this.bounds.end.y) {
-      this.position.y -= this.bounds.size.y;
+      this.position.y -= this.bounds.size.y - this.ui_buffer;
       this.vert_lives--;
     }
 

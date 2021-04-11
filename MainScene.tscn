@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprite.png" type="Texture" id=1]
 [ext_resource path="res://compiled/Ship.gd" type="Script" id=2]
 [ext_resource path="res://BulletSpawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/ui_font.tres" type="DynamicFont" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="RootNode" type="Node2D"]
+
+[node name="Control" parent="." instance=ExtResource( 4 )]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1026.0
+margin_bottom = 601.0
 
 [node name="Ship" type="KinematicBody2D" parent="."]
 position = Vector2( 126.247, 114.573 )
@@ -25,43 +33,17 @@ texture = ExtResource( 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 126.247, 114.573 )
+z_index = -1
 
 [node name="YouDieLabel" type="Label" parent="."]
-margin_left = 116.429
-margin_top = 151.785
-margin_right = 167.429
-margin_bottom = 165.785
-rect_scale = Vector2( 5.94714, 7.03647 )
-text = "You die!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FinalScoreLabel" type="Label" parent="."]
-margin_left = 173.0
-margin_top = 251.0
-margin_right = 224.0
-margin_bottom = 265.0
-rect_scale = Vector2( 3.39559, 3.80161 )
-text = "You die!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BulletsLabel" type="Label" parent="."]
-margin_left = 22.5544
-margin_top = 337.706
-margin_right = 71.5544
-margin_bottom = 351.706
-text = "Bullets:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
-margin_right = 191.0
-margin_bottom = 55.0
-text = "hellooooo"
+margin_left = 164.18
+margin_top = 480.305
+margin_right = 741.18
+margin_bottom = 526.305
+custom_fonts/font = ExtResource( 5 )
+text = "you will be missed
+Click to play again"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
