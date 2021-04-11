@@ -15,7 +15,7 @@ export class Bullet extends Area2D {
   alive_counter = 0
   @exports
   lives = 3
-  speed: float = 350.0
+  speed: float = 300.0
   bounds: Rect2
   x_d: float
   y_d: float
@@ -23,6 +23,7 @@ export class Bullet extends Area2D {
   horiz_lives = this.lives
   vert_lives = this.lives
   ui_buffer = 69
+  has_crossed_edge_of_screen = false
 
   constructor() {
     super()
@@ -54,9 +55,11 @@ export class Bullet extends Area2D {
     if (this.x_d < 0 && this.position.x < this.bounds.position.x) {
       this.position.x += this.bounds.size.x
       this.horiz_lives--
+      this.has_crossed_edge_of_screen = true
     } else if (this.x_d > 0 && this.position.x > this.bounds.end.x) {
       this.position.x -= this.bounds.size.x
       this.horiz_lives--
+      this.has_crossed_edge_of_screen = true
     }
 
     if (
@@ -65,12 +68,15 @@ export class Bullet extends Area2D {
     ) {
       this.position.y += this.bounds.size.y - this.ui_buffer
       this.vert_lives--
+      this.has_crossed_edge_of_screen = true
     } else if (this.y_d > 0 && this.position.y > this.bounds.end.y) {
       this.position.y -= this.bounds.size.y - this.ui_buffer
       this.vert_lives--
+      this.has_crossed_edge_of_screen = true
     }
 
     const min_lives = min(this.horiz_lives, this.vert_lives)
+
     if (min_lives <= 0) {
       this.queue_free()
     }

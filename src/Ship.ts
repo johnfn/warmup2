@@ -1,3 +1,4 @@
+import { GoldManager } from "src/GoldManager"
 import { Gun } from "src/Gun"
 
 enum State {
@@ -17,6 +18,9 @@ export class Ship extends KinematicBody2D {
 
   you_die_label = this.get_node(
     "/root/RootNode/DeathCanvas/YouDieLabel"
+  ) as Label
+  final_score_label = this.get_node(
+    "/root/RootNode/DeathCanvas/FinalScoreLabel"
   ) as Label
   score_text = this.get_node(
     "/root/RootNode/Control/Margin/LabelCanvas/ScoreText"
@@ -41,6 +45,7 @@ export class Ship extends KinematicBody2D {
     this.bounds = this.get_viewport_rect()
     this.position.x = 200
     this.you_die_label.visible = false
+    this.final_score_label.visible = false
   }
 
   die_animation() {
@@ -154,6 +159,9 @@ export class Ship extends KinematicBody2D {
     this.you_die_label.visible = true
 
     this.score_text.text = str(this.gun.total_bullets_fired)
+    this.final_score_label.text = str(
+      GoldManager.gold_gotten * 10 + this.gun.total_bullets_fired
+    )
 
     this.dead = true
 

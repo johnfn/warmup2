@@ -1,7 +1,7 @@
 import { BulletTscn } from "_godot_defs/dynamic/@scenes"
 
 export class Gun extends Node2D {
-  fire_speed: float = 0.25
+  fire_speed: float = 0.3
   time_to_fire: float = this.fire_speed
   ship = this.get_node_safe("/root/RootNode/Ship")
   root = this.get_node_safe("/root/RootNode")

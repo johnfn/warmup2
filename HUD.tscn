@@ -18,7 +18,7 @@ __meta__ = {
 }
 
 [node name="headerbg" type="Sprite" parent="Margin"]
-position = Vector2( 448.989, 36.8651 )
+position = Vector2( 448.989, 36.0273 )
 scale = Vector2( 7.64365, 1.5 )
 z_index = 2
 texture = ExtResource( 1 )
@@ -31,16 +31,16 @@ margin_top = 14.5874
 margin_right = 1030.35
 margin_bottom = 51.5874
 custom_fonts/font = ExtResource( 2 )
-text = "Score:"
+text = "Bullets:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreText" type="Label" parent="Margin/LabelCanvas"]
-margin_left = 202.933
-margin_top = 14.0
-margin_right = 242.933
-margin_bottom = 110.102
+margin_left = 250.687
+margin_top = 14.8378
+margin_right = 290.687
+margin_bottom = 110.94
 custom_fonts/font = ExtResource( 2 )
 text = "0
 "
