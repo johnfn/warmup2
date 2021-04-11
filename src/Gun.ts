@@ -5,6 +5,8 @@ export class Gun extends Node2D {
   time_to_fire: float = this.fire_speed
   ship = this.get_node_safe("/root/RootNode/Ship")
   root = this.get_node_safe("/root/RootNode")
+  bullets_label = this.get_node_safe("/root/RootNode/BulletsLabel")
+  total_bullets_fired = 0
 
   constructor() {
     super()
@@ -27,6 +29,9 @@ export class Gun extends Node2D {
       )
 
       this.root.add_child(bullet)
+
+      this.bullets_label.text =
+        "Bullets survived: " + str(++this.total_bullets_fired)
     }
   }
 }

@@ -1,11 +1,16 @@
+import { Gun } from "src/Gun"
+
 export class Ship extends KinematicBody2D {
   you_die_label = this.get_node("/root/RootNode/YouDieLabel") as Label
+  final_score_label = this.get_node("/root/RootNode/FinalScoreLabel") as Label
+  gun = this.get_node("/root/RootNode/Gun") as Gun
 
   constructor() {
     super()
 
     this.position.x = 200
     this.you_die_label.visible = false
+    this.final_score_label.visible = false
   }
 
   _process(delta: float) {
@@ -35,5 +40,8 @@ export class Ship extends KinematicBody2D {
   die() {
     this.visible = false
     this.you_die_label.visible = true
+    this.final_score_label.visible = true
+
+    this.final_score_label.text = "Score: " + str(this.gun.total_bullets_fired)
   }
 }

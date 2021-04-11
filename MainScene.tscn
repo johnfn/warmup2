@@ -41,3 +41,24 @@ text = "You die!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FinalScoreLabel" type="Label" parent="."]
+margin_left = 173.12
+margin_top = 251.146
+margin_right = 224.12
+margin_bottom = 265.146
+rect_scale = Vector2( 3.39559, 3.80161 )
+text = "You die!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BulletsLabel" type="Label" parent="."]
+margin_left = 22.5544
+margin_top = 337.706
+margin_right = 71.5544
+margin_bottom = 351.706
+text = "Bullets:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
