@@ -10,11 +10,23 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://compiled/bullet2.gd"
+}, {
+"base": "Node2D",
+"class": "Ship",
+"language": "GDScript",
+"path": "res://compiled/ship.gd"
+}, {
+"base": "Node2D",
 "class": "Test",
 "language": "GDScript",
 "path": "res://compiled/Test.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
+"Ship": "",
 "Test": ""
 }
 
