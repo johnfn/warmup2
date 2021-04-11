@@ -17,7 +17,7 @@ export class Gun extends Node2D {
   _process(delta: float) {
     this.time_to_fire -= delta
 
-    if (!is_instance_valid(this.ship)) {
+    if (this.ship.dead) {
       return
     }
 

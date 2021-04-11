@@ -18,7 +18,7 @@ export class Ship extends KinematicBody2D {
   you_die_label = this.get_node(
     "/root/RootNode/DeathCanvas/YouDieLabel"
   ) as Label
-  final_score_label = this.get_node(
+  score_text = this.get_node(
     "/root/RootNode/Control/Margin/LabelCanvas/ScoreText"
   ) as Label
   stage_label = this.get_node(
@@ -38,7 +38,6 @@ export class Ship extends KinematicBody2D {
   constructor() {
     super()
 
-    this.final_score_label.visible = false
     this.bounds = this.get_viewport_rect()
     this.position.x = 200
     this.you_die_label.visible = false
@@ -145,7 +144,7 @@ export class Ship extends KinematicBody2D {
         new Vector2(0, this.bounds.size.y - this.ui_buffer)
       )
     }
-    this.final_score_label.text = str(this.gun.total_bullets_fired)
+    this.score_text.text = str(this.gun.total_bullets_fired)
     this.stage_label.text = str(
       1 + floor(this.gun.total_bullets_fired / this.gun.bullets_per_stage)
     )
@@ -154,7 +153,7 @@ export class Ship extends KinematicBody2D {
   die() {
     this.you_die_label.visible = true
 
-    this.final_score_label.text = str(this.gun.total_bullets_fired)
+    this.score_text.text = str(this.gun.total_bullets_fired)
 
     this.dead = true
 
