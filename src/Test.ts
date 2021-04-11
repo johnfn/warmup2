@@ -1,3 +1,5 @@
+// TODO: Put prettier into file
+
 export class Test extends Node2D {
   constructor() {
     super()
