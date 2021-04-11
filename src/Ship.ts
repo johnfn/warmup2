@@ -2,7 +2,8 @@ import { Gun } from "src/Gun"
 
 enum State {
   Normal,
-  Dying,
+  DyingAnimation,
+  Dead,
 }
 
 export class Ship extends KinematicBody2D {
@@ -32,6 +33,7 @@ export class Ship extends KinematicBody2D {
   d_held: bool = false
 
   state: State = State.Normal
+  death_tick = 0
 
   constructor() {
     super()
@@ -42,7 +44,40 @@ export class Ship extends KinematicBody2D {
     this.you_die_label.visible = false
   }
 
+  die_animation() {
+    ++this.death_tick
+
+    this.scale.x = 1 + float(this.death_tick) / 30.0
+    this.scale.y = 1 + float(this.death_tick) / 30.0
+
+    this.get_node_safe("sprite").modulate.a =
+      1.0 - float(this.death_tick) / 100.0
+
+    if (this.death_tick > 100) {
+      this.state = State.Dead
+      // this.queue_free() // note this kills the physics_process which also works as our main game loop. kinda.
+    }
+  }
+
   _physics_process(delta: float) {
+    if (this.state === State.DyingAnimation) {
+      this.die_animation()
+
+      if (Input.is_action_pressed("new_game")) {
+        this.get_tree().reload_current_scene()
+      }
+
+      return
+    }
+
+    if (this.state === State.Dead) {
+      if (Input.is_action_pressed("new_game")) {
+        this.get_tree().reload_current_scene()
+      }
+
+      return
+    }
+
     const move_left =
       Input.is_key_pressed(KeyList.KEY_A) && (this.a_held || !this.d_held)
     const move_right = Input.is_key_pressed(KeyList.KEY_D) && !this.a_held
@@ -114,20 +149,15 @@ export class Ship extends KinematicBody2D {
     this.stage_label.text = str(
       1 + floor(this.gun.total_bullets_fired / this.gun.bullets_per_stage)
     )
-
-    if (this.dead && Input.is_action_pressed("new_game")) {
-      this.get_tree().reload_current_scene()
-    }
   }
 
   die() {
-    this.visible = false
     this.you_die_label.visible = true
-    this.final_score_label.visible = true
 
-    this.final_score_label.text = "Score: " + str(this.gun.total_bullets_fired)
+    this.final_score_label.text = str(this.gun.total_bullets_fired)
 
-    this.queue_free()
     this.dead = true
+
+    this.state = State.DyingAnimation
   }
 }
