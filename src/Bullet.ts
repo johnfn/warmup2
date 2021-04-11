@@ -21,7 +21,7 @@ export class Bullet extends Area2D {
   on_body_enter(body: Node2D) {
     // alive_counter prevents newly spawned bullets from immediately killing you
 
-    if (body instanceof Ship && this.alive_counter > 180) {
+    if (body instanceof Ship && this.alive_counter > 30) {
       body.die()
     }
   }
