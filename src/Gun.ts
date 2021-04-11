@@ -8,12 +8,18 @@ export class Gun extends Node2D {
   bullets_label = this.get_node_safe("/root/RootNode/BulletsLabel")
   total_bullets_fired = 0
 
+  thingy = load("res://Bullet.tscn")
+
   constructor() {
     super()
   }
 
   _process(delta: float) {
     this.time_to_fire -= delta
+
+    if (!is_instance_valid(this.ship)) {
+      return
+    }
 
     if (this.time_to_fire <= 0 && this.ship.visible) {
       this.time_to_fire += this.fire_speed

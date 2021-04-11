@@ -1,7 +1,7 @@
 import { Ship } from "src/Ship"
 
 export class Bullet extends Area2D {
-  speed: float = 100.0
+  speed: float = 400.0
   bounds: Rect2
   x_d: float
   y_d: float
