@@ -30,3 +30,14 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="Ship"]
 texture = ExtResource( 1 )
+
+[node name="YouDieLabel" type="Label" parent="."]
+margin_left = 116.429
+margin_top = 151.785
+margin_right = 167.429
+margin_bottom = 165.785
+rect_scale = Vector2( 5.94714, 7.03647 )
+text = "You die!"
+__meta__ = {
+"_edit_use_anchors_": false
+}

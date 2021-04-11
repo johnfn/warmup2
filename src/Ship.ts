@@ -1,8 +1,11 @@
 export class Ship extends KinematicBody2D {
+  you_die_label = this.get_node("/root/RootNode/YouDieLabel") as Label
+
   constructor() {
     super()
 
     this.position.x = 200
+    this.you_die_label.visible = false
   }
 
   _process(delta: float) {
@@ -30,6 +33,7 @@ export class Ship extends KinematicBody2D {
   }
 
   die() {
-    this.queue_free()
+    this.visible = false
+    this.you_die_label.visible = true
   }
 }
