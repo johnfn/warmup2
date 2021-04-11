@@ -6,7 +6,9 @@ export class Ship extends KinematicBody2D {
   max_velocity = 350.0;
   accel = 55000.0;
   deaccel = 55000.0;
-  you_die_label = this.get_node("/root/RootNode/YouDieLabel") as Label;
+  you_die_label = this.get_node(
+    "/root/RootNode/DeathCanvas/YouDieLabel"
+  ) as Label;
   score_label = this.get_node(
     "/root/RootNode/Control/Margin/LabelCanvas/ScoreText"
   ) as Label;

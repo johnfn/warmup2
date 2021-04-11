@@ -35,11 +35,13 @@ texture = ExtResource( 1 )
 position = Vector2( 126.247, 114.573 )
 z_index = -1
 
-[node name="YouDieLabel" type="Label" parent="."]
+[node name="DeathCanvas" type="CanvasLayer" parent="."]
+
+[node name="YouDieLabel" type="Label" parent="DeathCanvas"]
 margin_left = 164.18
 margin_top = 480.305
 margin_right = 741.18
-margin_bottom = 526.305
+margin_bottom = 575.305
 custom_fonts/font = ExtResource( 5 )
 text = "you will be missed
 Click to play again"
