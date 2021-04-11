@@ -5,8 +5,8 @@ export class Gun extends Node2D {
   time_to_fire: float = this.fire_speed
   ship = this.get_node_safe("/root/RootNode/Ship")
   root = this.get_node_safe("/root/RootNode")
-  bullets_label = this.get_node_safe("/root/RootNode/BulletsLabel")
   total_bullets_fired = 0
+  bullets_per_stage = 20
 
   thingy = load("res://Bullet.tscn")
 
@@ -21,23 +21,25 @@ export class Gun extends Node2D {
       return
     }
 
+    let mouse_pos = this.get_viewport().get_mouse_position()
+    const mouse_angle = atan2(
+      mouse_pos.y - this.ship.global_position.y,
+      mouse_pos.x - this.ship.global_position.x
+    )
+    this.ship.rotation = mouse_angle
     if (this.time_to_fire <= 0 && this.ship.visible) {
       this.time_to_fire += this.fire_speed
 
       let bullet = BulletTscn.instance()
 
       bullet.position = this.ship.global_position
+      bullet.lives =
+        1 + int(floor(this.total_bullets_fired / this.bullets_per_stage))
 
-      let mouse_pos = this.get_viewport().get_mouse_position()
-      bullet.rotation = atan2(
-        mouse_pos.y - this.global_position.y,
-        mouse_pos.x - this.global_position.x
-      )
+      bullet.rotation = mouse_angle
 
       this.root.add_child(bullet)
-
-      this.bullets_label.text =
-        "Bullets survived: " + str(++this.total_bullets_fired)
+      this.total_bullets_fired++
     }
   }
 }
