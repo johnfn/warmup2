@@ -1,4 +1,5 @@
-export class Ship extends Node2D {
+export class Ship extends KinematicBody2D {
+  you_die_label = this.get_node("/root/RootNode/YouDieLabel") as Label;
   velocity = new Vector2(0, 0);
   max_velocity = 400.0;
   accel = 60000.0;
@@ -12,6 +13,7 @@ export class Ship extends Node2D {
   constructor() {
     super();
     this.position.x = 200;
+    this.you_die_label.visible = false;
   }
 
   _process(delta: float) {
@@ -61,11 +63,18 @@ export class Ship extends Node2D {
 
     if (this.velocity.length() > this.max_velocity) {
       const move_angle = atan2(this.velocity.y, this.velocity.x);
-      this.position.x += cos(move_angle) * this.max_velocity * delta;
-      this.position.y += sin(move_angle) * this.max_velocity * delta;
+      this.move_and_slide(
+        new Vector2(cos(move_angle), sin(move_angle)).mul(
+          this.max_velocity * delta
+        )
+      );
     } else {
-      this.position.x += this.velocity.x * delta;
-      this.position.y += this.velocity.y * delta;
+      this.move_and_slide(this.velocity.mul(delta));
     }
+  }
+
+  die() {
+    this.visible = false;
+    this.you_die_label.visible = true;
   }
 }
