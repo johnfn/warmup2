@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://compiled/Bullet.gd"
+}, {
+"base": "Node2D",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://compiled/Gun.gd"
+}, {
 "base": "Node2D",
 "class": "Test",
 "language": "GDScript",
 "path": "res://compiled/Test.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
+"Gun": "",
 "Test": ""
 }
 
@@ -23,6 +35,10 @@ _global_script_class_icons={
 config/name="Warmupii"
 run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
+
+[global]
+
+tab=false
 
 [physics]
 
