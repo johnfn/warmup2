@@ -3,6 +3,12 @@ import { BulletTscn } from "_godot_defs/dynamic/@scenes"
 export class Gun extends Node2D {
   fire_speed: float = 0.25
   time_to_fire: float = this.fire_speed
+  ship = this.get_node_safe("/root/RootNode/Ship")
+  root = this.get_node_safe("/root/RootNode")
+
+  constructor() {
+    super()
+  }
 
   _process(delta: float) {
     this.time_to_fire -= delta
@@ -12,10 +18,7 @@ export class Gun extends Node2D {
 
       let bullet = BulletTscn.instance()
 
-      let spawn_location = this.position
-      bullet.position = spawn_location
-
-      print("spawn_location", spawn_location)
+      bullet.position = this.ship.global_position
 
       let mouse_pos = this.get_viewport().get_mouse_position()
       bullet.rotation = atan2(
@@ -23,9 +26,7 @@ export class Gun extends Node2D {
         mouse_pos.x - this.global_position.x
       )
 
-      this.add_child(bullet)
-
-      this.time_to_fire = 999999999999
+      this.root.add_child(bullet)
     }
   }
 }

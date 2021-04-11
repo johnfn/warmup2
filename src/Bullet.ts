@@ -11,8 +11,6 @@ export class Bullet extends Area2D {
 
     this.x_d = cos(this.rotation) * this.speed
     this.y_d = sin(this.rotation) * this.speed
-
-    print(this.x_d, this.y_d)
   }
 
   _process(delta: float) {
@@ -30,7 +28,5 @@ export class Bullet extends Area2D {
     } else if (this.y_d > 0 && this.position.y > this.bounds.end.y) {
       this.position.y -= this.bounds.size.y
     }
-
-    print(this.position)
   }
 }

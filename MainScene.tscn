@@ -6,6 +6,9 @@
 
 [node name="RootNode" type="Node2D"]
 
+[node name="Gun" parent="." instance=ExtResource( 3 )]
+position = Vector2( 126.247, 114.573 )
+
 [node name="Label" type="Label" parent="."]
 margin_right = 191.0
 margin_bottom = 55.0
@@ -20,5 +23,3 @@ __meta__ = {
 position = Vector2( 126.247, 114.573 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-
-[node name="Node2D" parent="Ship" instance=ExtResource( 3 )]
