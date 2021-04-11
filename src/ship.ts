@@ -4,7 +4,7 @@ export class Ship extends Node2D {
   constructor() {
     super();
     this.position.x = 200;
-    print("yo");
+    print("yo?");
   }
   _process(delta: float) {
     const moveDistance = 300.0 * delta;
