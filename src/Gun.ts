@@ -15,6 +15,8 @@ export class Gun extends Node2D {
       let spawn_location = this.position
       bullet.position = spawn_location
 
+      print("spawn_location", spawn_location)
+
       let mouse_pos = this.get_viewport().get_mouse_position()
       bullet.rotation = atan2(
         mouse_pos.y - this.global_position.y,
@@ -22,6 +24,8 @@ export class Gun extends Node2D {
       )
 
       this.add_child(bullet)
+
+      this.time_to_fire = 999999999999
     }
   }
 }
