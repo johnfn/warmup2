@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://compiled/Gun.gd"
 }, {
-"base": "Node2D",
+"base": "KinematicBody2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://compiled/Ship.gd"

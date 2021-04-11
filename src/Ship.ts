@@ -1,25 +1,35 @@
-export class Ship extends Node2D {
+export class Ship extends KinematicBody2D {
   constructor() {
     super()
+
     this.position.x = 200
   }
 
   _process(delta: float) {
-    const moveDistance = 300.0 * delta
+    const moveDistance = 300.0
+
+    let dpos: Vector2 = new Vector2(0, 0)
+
     if (Input.is_key_pressed(KeyList.KEY_W)) {
-      this.position.y = this.position.y - moveDistance
+      dpos.y += -moveDistance
     }
 
     if (Input.is_key_pressed(KeyList.KEY_S)) {
-      this.position.y = this.position.y + moveDistance
+      dpos.y = +moveDistance
     }
 
     if (Input.is_key_pressed(KeyList.KEY_A)) {
-      this.position.x = this.position.x - moveDistance
+      dpos.x = -moveDistance
     }
 
     if (Input.is_key_pressed(KeyList.KEY_D)) {
-      this.position.x = this.position.x + moveDistance
+      dpos.x = +moveDistance
     }
+
+    this.move_and_slide(dpos)
+  }
+
+  die() {
+    this.queue_free()
   }
 }

@@ -13,7 +13,7 @@ export class Gun extends Node2D {
   _process(delta: float) {
     this.time_to_fire -= delta
 
-    if (this.time_to_fire <= 0) {
+    if (this.time_to_fire <= 0 && this.ship) {
       this.time_to_fire += this.fire_speed
 
       let bullet = BulletTscn.instance()
