@@ -69,12 +69,10 @@ export class Ship extends KinematicBody2D {
     if (this.velocity.length() > this.max_velocity) {
       const move_angle = atan2(this.velocity.y, this.velocity.x);
       this.move_and_slide(
-        new Vector2(cos(move_angle), sin(move_angle)).mul(
-          this.max_velocity * delta
-        )
+        new Vector2(cos(move_angle), sin(move_angle)).mul(this.max_velocity)
       );
     } else {
-      this.move_and_slide(this.velocity.mul(delta));
+      this.move_and_slide(this.velocity);
     }
   }
 
